@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>تعیین وقت</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph1.jpg) no-repeat fixed; background-size: 85% 100vh;">
+  <nav class="navbar">
+    <a href="{{ url_for('dashboard') }}">داشبورد</a>
+    <a href="{{ url_for('booking') }}">تعیین وقت</a>
+    <a href="{{ url_for('followup') }}">پیگیری وقت</a>
+    <a href="{{ url_for('contact') }}">ارتباط با ما</a>
+  </nav> 
+  <div class="content">
+    <form class="centered-content" action="{{ url_for('booking') }}" method="POST" style="justify-content: center;margin-top: 50%; margin-left: -30%;margin-right: 30%;">
+      <h2>تعیین وقت</h2>         
+      {% if error %}
+        <div class="error-message">{{ error }}</div>
+      {% endif %}      
+      <div class="form-group">
+        <label for="appointment_day">انتخاب روز</label>
+        <select id="appointment_day" name="appointment_day" required style="width: 50%;">
+          {% for day in range(1, 31) %}
+            {% set shamsi_date = today + timedelta(days=day) %}
+            {% set weekday = shamsi_date.togregorian().weekday() %}
+            {% if weekday == 5 or weekday == 0 or weekday == 2 %}  
+              <option value="{{ shamsi_date.togregorian() }}">
+                {{ shamsi_date.strftime('%Y-%m-%d') }}
+              </option>
+            {% endif %}
+          {% endfor %}
+        </select>        
+      </div>
+      <div class="form-group">
+        <label for="appointment_time">انتخاب ساعت</label>
+        <select id="appointment_time" name="appointment_time" required style="width: 50%;">
+          {% for hour in range(10, 15) %}
+            {% for minute in [0, 10, 20, 30, 40, 50] %}
+              {% set appointment_time = '{:02}:{:02}'.format(hour, minute) %}
+              {% if (request.form['appointment_day'], appointment_time) not in booked_slots %}
+                <option value="{{ appointment_time }}">
+                  {{ appointment_time }}
+                </option>
+              {% else %}
+                <option value="{{ appointment_time }}" disabled>
+                  {{ appointment_time }} - رزرو شده
+                </option>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </select>        
+      </div>
+      
+      <button type="submit" style="height: 30px;">تایید</button>
+    </form>    
+  </div>
+</body>
+</html>

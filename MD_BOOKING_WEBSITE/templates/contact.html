@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>ارتباط با ما</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph1.jpg) no-repeat fixed; background-size: 85% 100vh;">
+  <nav class="navbar">
+    <a href="{{ url_for('dashboard') }}">داشبورد</a>
+    <a href="{{ url_for('booking') }}">تعیین وقت</a>
+    <a href="{{ url_for('followup') }}">پیگیری وقت</a>
+    <a href="{{ url_for('contact') }}">ارتباط با ما</a>
+  </nav>
+  <div class="site-container">
+    <h2>ارتباط با ما</h2>
+    <p>شماره تماس: 09127907402</p>
+    <p>آدرس: تهران،اتوبان شهید اشرفی اصفهانی،شهرک هما،خیابان حسن آذری،پلاک 23</p>
+  </div>
+</body>
+</html>

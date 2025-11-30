@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>داشبورد</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph1.jpg) no-repeat fixed; background-size: 85% 100vh;">
+  <nav class="navbar">
+    <a href="{{ url_for('dashboard') }}">داشبورد</a>
+    <a href="{{ url_for('booking') }}">تعیین وقت</a>
+    <a href="{{ url_for('followup') }}">پیگیری وقت</a>
+    <a href="{{ url_for('contact') }}">ارتباط با ما</a>
+  </nav>
+  <div class="dashboard">
+    <h2>داشبورد کاربر</h2>
+    {% if success %}
+      <p class="success">{{ success }}</p>
+    {% endif %}
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+    <form class="centered-content" method="post" action="{{ url_for('dashboard') }}">
+      <div class="form-group">
+        <label for="first_name">نام</label>
+        <input type="text" id="first_name" name="first_name" required value="{{ user_info.name or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="last_name">نام خانوادگی</label>
+        <input type="text" id="last_name" name="last_name" required value="{{ user_info.last_name or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="national_id">کد ملی</label>
+        <input type="text" id="national_id" name="national_id" required value="{{ user_info.national_id or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="phone">شماره تلفن</label>
+        <input type="text" id="phone" name="phone" required value="{{ user_info.phone_number or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="birth_year">تاریخ تولد</label>
+        <div class="birthdate-select">
+            <select id="birth_year" name="birth_year" required>
+                <option value="">سال</option>
+                {% for year in range(1300, 1403) %}
+                    <option value="{{ year }}" {% if birth_year == year %}selected{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+            <select id="birth_month" name="birth_month" required>
+                <option value="">ماه</option>
+                {% for month in range(1, 13) %}
+                    <option value="{{ month }}" {% if birth_month == month %}selected{% endif %}>
+                        {% if month == 1 %}فروردین
+                        {% elif month == 2 %}اردیبهشت
+                        {% elif month == 3 %}خرداد
+                        {% elif month == 4 %}تیر
+                        {% elif month == 5 %}مرداد
+                        {% elif month == 6 %}شهریور
+                        {% elif month == 7 %}مهر
+                        {% elif month == 8 %}آبان
+                        {% elif month == 9 %}آذر
+                        {% elif month == 10 %}دی
+                        {% elif month == 11 %}بهمن
+                        {% elif month == 12 %}اسفند
+                        {% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+            <select id="birth_day" name="birth_day" required>
+                <option value="">روز</option>
+                {% for day in range(1, 32) %}
+                    <option value="{{ day }}" {% if birth_day == day %}selected{% endif %}>{{ day }}</option>
+                {% endfor %}
+            </select>
+        </div>
+      </div>    
+      <button type="submit">ثبت</button>
+    </form>
+  </div>
+</body>
+</html>

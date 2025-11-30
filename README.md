@@ -1,2 +1,6 @@
-# Mediacal-Appointment-Website
+# Medical-Appointment-Website
 A medical appointment website designed to help both patients and doctors manage and schedule their time more efficiently.
+
+Using the Flask framework for the backend and HTML & CSS for the frontend, I developed a website where users can register using their email and password, and their accounts are stored in a database. After signing up, users provide additional personal information such as first name, last name, national ID, phone number, and date of birth. Once their details are saved, they can view available appointment slots on the website and book an appointment. If an appointment date is fully booked, the user cannot select it. The appointment details are then stored in the database. If needed, users can also cancel their appointments. After visiting the doctor, their status in the database is updated to visited.
+To run this project, you need to install Flask, SQLite3, datetime, and jdatetime. You also need to use HTML and CSS for the frontend.
+This website is very useful for those who want to explore web development using a Python framework.

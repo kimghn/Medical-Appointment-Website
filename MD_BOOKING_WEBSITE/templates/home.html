@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه اصلی</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph4.jpg) no-repeat fixed; background-size: 85% 100vh;">
+  <div class="home">
+    <nav class="navbar">
+      <a href="{{ url_for('dashboard') }}">داشبورد</a>
+      <a href="{{ url_for('booking') }}">تعیین وقت</a>
+      <a href="{{ url_for('followup') }}">پیگیری وقت</a>
+      <a href="{{ url_for('contact') }}">ارتباط با ما</a>
+    </nav>
+  </div>
+</body>
+</html>

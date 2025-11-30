@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه نخست</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph2.jpg) no-repeat fixed; background-size: cover;" >
+  <div class="centered-content" style="background: lightgray;margin-top: 25vh;justify-content: center;">
+    <h1>به سایت رزرو وقت خوش آمدید</h1>
+    <div class="centered-buttons">
+      <a href="{{ url_for('signup') }}" class="button">ثبت نام</a> 
+      <a href="{{ url_for('login') }}" class="button">ورود</a> 
+    </div>  
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>پیگیری وقت</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background: url(../static/images/webph1.jpg) no-repeat fixed; background-size: 85% 100vh;">
+  <nav class="navbar">
+    <a href="{{ url_for('dashboard') }}">داشبورد</a>
+    <a href="{{ url_for('booking') }}">تعیین وقت</a>
+    <a href="{{ url_for('followup') }}">پیگیری وقت</a>
+    <a href="{{ url_for('contact') }}">ارتباط با ما</a>
+  </nav>
+  <div class="site-container">
+    <h2>پیگیری وقت</h2>
+    {% if appointments %}
+        <ul>
+            {% for appointment in appointments %}
+                <li>
+                    <p>زمان و تاریخ تعیین شده:</p>
+                    <p>روز: {{ appointment.date }}</p>
+                    <p>ساعت: {{ appointment.time }}</p>
+                    <p>وضعیت: {{ appointment.status_text }}</p>
+                    {% if appointment.status == 0 %}
+                        <form action="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" method="POST">
+                            <button type="submit" class="cancel-button">لغو وقت</button>
+                        </form>
+                    {% endif %}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>وقت تعیین نشده است.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
